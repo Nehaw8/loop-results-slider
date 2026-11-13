@@ -1,0 +1,136 @@
+{
+    "key": "group_loop_results_slider",
+    "title": "Block: Results Slider",
+    "fields": [
+        {
+            "key": "field_lrs_heading",
+            "label": "Heading",
+            "name": "heading",
+            "type": "textarea",
+            "instructions": "Large background heading. Put each line on a new row (e.g. \"Real Results.\" / \"Real Growth.\").",
+            "rows": 2,
+            "new_lines": "",
+            "default_value": "Real Results.\nReal Growth."
+        },
+        {
+            "key": "field_lrs_slides",
+            "label": "Slides",
+            "name": "slides",
+            "type": "repeater",
+            "instructions": "Each slide is one case study.",
+            "layout": "block",
+            "min": 1,
+            "max": 0,
+            "button_label": "Add Slide",
+            "collapsed": "field_lrs_summary",
+            "sub_fields": [
+                {
+                    "key": "field_lrs_image",
+                    "label": "Image",
+                    "name": "image",
+                    "type": "image",
+                    "instructions": "Portrait image, recommended 960 x 1020px.",
+                    "required": 1,
+                    "return_format": "id",
+                    "preview_size": "medium",
+                    "library": "all",
+                    "mime_types": "jpg,jpeg,png,webp",
+                    "wrapper": { "width": "35" }
+                },
+                {
+                    "key": "field_lrs_summary",
+                    "label": "Summary",
+                    "name": "summary",
+                    "type": "textarea",
+                    "rows": 3,
+                    "new_lines": "",
+                    "maxlength": 160,
+                    "wrapper": { "width": "65" }
+                },
+                {
+                    "key": "field_lrs_tags",
+                    "label": "Tags",
+                    "name": "tags",
+                    "type": "repeater",
+                    "instructions": "Service tags shown under the image, e.g. Website, SEO.",
+                    "layout": "table",
+                    "max": 4,
+                    "button_label": "Add Tag",
+                    "sub_fields": [
+                        {
+                            "key": "field_lrs_tag_label",
+                            "label": "Label",
+                            "name": "label",
+                            "type": "text",
+                            "required": 1
+                        }
+                    ]
+                },
+                {
+                    "key": "field_lrs_stats",
+                    "label": "Stats",
+                    "name": "stats",
+                    "type": "repeater",
+                    "instructions": "Shown in the orange card (up to 3).",
+                    "layout": "table",
+                    "min": 1,
+                    "max": 3,
+                    "button_label": "Add Stat",
+                    "sub_fields": [
+                        {
+                            "key": "field_lrs_stat_value",
+                            "label": "Value",
+                            "name": "value",
+                            "type": "text",
+                            "instructions": "e.g. 603 or £21k",
+                            "required": 1,
+                            "wrapper": { "width": "25" }
+                        },
+                        {
+                            "key": "field_lrs_stat_suffix",
+                            "label": "Suffix",
+                            "name": "suffix",
+                            "type": "text",
+                            "instructions": "Smaller text, e.g. %",
+                            "maxlength": 3,
+                            "wrapper": { "width": "15" }
+                        },
+                        {
+                            "key": "field_lrs_stat_label",
+                            "label": "Label",
+                            "name": "label",
+                            "type": "text",
+                            "required": 1,
+                            "wrapper": { "width": "60" }
+                        }
+                    ]
+                },
+                {
+                    "key": "field_lrs_link",
+                    "label": "Case Study Link",
+                    "name": "link",
+                    "type": "link",
+                    "instructions": "Optional. Shows the orange arrow link.",
+                    "return_format": "array"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "loop/results-slider"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "description": "Fields for the Results Slider block.",
+    "show_in_rest": 0
+}

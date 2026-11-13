@@ -1,0 +1,22 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "loop/results-slider",
+  "title": "Results Slider",
+  "description": "Case study slider with image, tags, summary and an orange stats card.",
+  "category": "loop-modules",
+  "icon": "chart-bar",
+  "keywords": ["results", "case study", "stats", "slider"],
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "render.php"
+  },
+  "supports": {
+    "align": ["full"],
+    "anchor": true,
+    "mode": true,
+    "jsx": false
+  },
+  "style": "loop-results-slider",
+  "viewScript": "loop-results-slider"
+}

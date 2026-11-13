@@ -1,0 +1,289 @@
+/* ==========================================================================
+   Results Slider (loop/results-slider)
+   Mobile-first. Desktop layout from 1024px.
+   ========================================================================== */
+
+.results-slider {
+	--rs-bg: #333333;
+	--rs-heading: #3c3c3c;      /* faint background heading */
+	--rs-accent: #e17a2d;       /* orange */
+	--rs-text: #ffffff;
+	--rs-radius: 10px;
+	--rs-notch: 56px;           /* size of the cut-out on the image's top-left */
+	--rs-notch-r: 10px;         /* rounding inside the cut-out */
+	--rs-overlap: 0px;          /* image pokes above the section on desktop */
+	--rs-font: "Inter", "Helvetica Neue", Arial, sans-serif;
+
+	position: relative;
+	overflow: hidden;
+	color: var(--rs-text);
+	font-family: var(--rs-font);
+	/* Background starts below the overlap so the image can sit "above" the section. */
+	background: linear-gradient(to bottom, transparent var(--rs-overlap), var(--rs-bg) var(--rs-overlap));
+	padding: calc(var(--rs-overlap) + 64px) 20px 64px;
+}
+
+.results-slider *,
+.results-slider *::before,
+.results-slider *::after {
+	box-sizing: border-box;
+}
+
+.results-slider__inner {
+	position: relative;
+	max-width: 1760px;
+	margin: 0 auto;
+	display: grid;
+	gap: 40px;
+}
+
+/* --- Intro: heading + arrows -------------------------------------------- */
+
+.results-slider__heading {
+	margin: 0;
+	font-size: clamp(3rem, 6.2vw, 7.25rem);
+	font-weight: 800;
+	line-height: 0.95;
+	letter-spacing: -0.02em;
+	color: var(--rs-heading);
+	user-select: none;
+}
+
+.results-slider__heading span {
+	display: block;
+}
+
+.results-slider__heading span:nth-child(2) {
+	padding-left: 0.17em;     /* second line is nudged right in the design */
+}
+
+.results-slider__nav {
+	display: flex;
+	gap: 12px;
+	margin-top: 24px;
+}
+
+.results-slider__arrow,
+.results-slider__link {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 44px;
+	min-height: 44px;
+	padding: 0;
+	border: 0;
+	background: none;
+	color: var(--rs-accent);
+	cursor: pointer;
+	transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.results-slider__arrow--prev:hover { transform: translateX(-4px); }
+.results-slider__arrow--next:hover { transform: translateX(4px); }
+.results-slider__link:hover        { transform: translateY(-4px); }
+
+.results-slider__arrow:focus-visible,
+.results-slider__link:focus-visible {
+	outline: 2px solid var(--rs-accent);
+	outline-offset: 4px;
+	border-radius: 4px;
+}
+
+/* --- Slides -------------------------------------------------------------- */
+
+.results-slider__track {
+	display: grid;               /* stack slides in one cell so height never jumps */
+}
+
+.results-slider__slide {
+	grid-area: 1 / 1;
+	display: grid;
+	gap: 32px;
+	animation: rs-fade 0.45s ease both;
+}
+
+.results-slider__slide[hidden] {
+	display: none;
+}
+
+@keyframes rs-fade {
+	from { opacity: 0; transform: translateY(12px); }
+	to   { opacity: 1; transform: none; }
+}
+
+/* Image with the stepped, rounded cut-out on the top-left corner.
+   Built from mask layers so the real background shows through the notch. */
+.results-slider__media {
+	--n: var(--rs-notch);
+	--r: var(--rs-notch-r);
+
+	margin: 0;
+	aspect-ratio: 475 / 572;
+	border-radius: var(--rs-radius);
+	overflow: hidden;
+	-webkit-mask:
+		/* bottom block (below the notch) with rounded top-left */
+		linear-gradient(#000 0 0) var(--r) var(--n) / calc(100% - var(--r)) calc(100% - var(--n)) no-repeat,
+		linear-gradient(#000 0 0) 0 calc(var(--n) + var(--r)) / 100% calc(100% - var(--n) - var(--r)) no-repeat,
+		radial-gradient(circle at var(--r) var(--r), #000 calc(var(--r) - 0.5px), transparent var(--r)) 0 var(--n) / calc(var(--r) * 2) calc(var(--r) * 2) no-repeat,
+		/* top block (right of the notch) with rounded top-left */
+		linear-gradient(#000 0 0) calc(var(--n) + var(--r)) 0 / calc(100% - var(--n) - var(--r)) calc(var(--n) + var(--r)) no-repeat,
+		linear-gradient(#000 0 0) var(--n) var(--r) / calc(100% - var(--n)) var(--n) no-repeat,
+		radial-gradient(circle at var(--r) var(--r), #000 calc(var(--r) - 0.5px), transparent var(--r)) var(--n) 0 / calc(var(--r) * 2) calc(var(--r) * 2) no-repeat,
+		/* inside fillet where the two blocks meet */
+		radial-gradient(circle at 0 0, transparent calc(var(--r) - 0.5px), #000 var(--r)) calc(var(--n) - var(--r)) calc(var(--n) - var(--r)) / var(--r) var(--r) no-repeat;
+	mask:
+		linear-gradient(#000 0 0) var(--r) var(--n) / calc(100% - var(--r)) calc(100% - var(--n)) no-repeat,
+		linear-gradient(#000 0 0) 0 calc(var(--n) + var(--r)) / 100% calc(100% - var(--n) - var(--r)) no-repeat,
+		radial-gradient(circle at var(--r) var(--r), #000 calc(var(--r) - 0.5px), transparent var(--r)) 0 var(--n) / calc(var(--r) * 2) calc(var(--r) * 2) no-repeat,
+		linear-gradient(#000 0 0) calc(var(--n) + var(--r)) 0 / calc(100% - var(--n) - var(--r)) calc(var(--n) + var(--r)) no-repeat,
+		linear-gradient(#000 0 0) var(--n) var(--r) / calc(100% - var(--n)) var(--n) no-repeat,
+		radial-gradient(circle at var(--r) var(--r), #000 calc(var(--r) - 0.5px), transparent var(--r)) var(--n) 0 / calc(var(--r) * 2) calc(var(--r) * 2) no-repeat,
+		radial-gradient(circle at 0 0, transparent calc(var(--r) - 0.5px), #000 var(--r)) calc(var(--n) - var(--r)) calc(var(--n) - var(--r)) / var(--r) var(--r) no-repeat;
+}
+
+.results-slider__image {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.results-slider__tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin: 22px 0 0;
+	padding: 0;
+	list-style: none;
+}
+
+.results-slider__tag {
+	padding: 5px 14px;
+	border: 1.5px solid currentColor;
+	border-radius: 6px;
+	font-size: 0.75rem;
+	line-height: 1.2;
+}
+
+.results-slider__summary {
+	margin: 20px 0 0;
+	max-width: 30em;
+	font-size: clamp(1.125rem, 1.15vw, 1.375rem);
+	font-weight: 700;
+	line-height: 1.4;
+}
+
+/* --- Orange stats card --------------------------------------------------- */
+
+.results-slider__aside {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	gap: 24px;
+}
+
+.results-slider__stats {
+	width: 100%;
+	margin: 0;
+	padding: 48px 24px;
+	display: grid;
+	gap: 40px;
+	background: var(--rs-accent);
+	border-radius: 4px;
+	text-align: center;
+}
+
+.results-slider__stat {
+	display: flex;
+	flex-direction: column-reverse;  /* value visually above label; dt stays first in the DOM */
+	gap: 4px;
+}
+
+.results-slider__stat-value {
+	margin: 0;
+	font-size: clamp(3rem, 4vw, 4.75rem);
+	font-weight: 800;
+	line-height: 1;
+	letter-spacing: -0.02em;
+}
+
+.results-slider__stat-suffix {
+	font-size: 0.3em;
+	margin-left: 0.08em;
+	letter-spacing: 0;
+}
+
+.results-slider__stat-label {
+	font-size: clamp(0.875rem, 0.8vw, 1.125rem);
+	line-height: 1.3;
+}
+
+/* --- Desktop --------------------------------------------------------------- */
+
+@media (min-width: 1024px) {
+	.results-slider {
+		--rs-overlap: 52px;
+		--rs-notch: 100px;
+		--rs-notch-r: 18px;
+		padding: var(--rs-overlap) 80px 72px 0;
+	}
+
+	.results-slider__inner {
+		max-width: none;
+		grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+		gap: 0 6%;
+		align-items: start;
+	}
+
+	.results-slider__intro {
+		padding-top: 18px;   /* heading sits roughly level with the top of the image */
+	}
+
+	.results-slider__heading {
+		margin-left: -0.06em;   /* bleeds off the left edge like the design */
+	}
+
+	.results-slider__nav {
+		justify-content: flex-end;
+		margin-top: 7vw;
+		padding-right: 6%;
+	}
+
+	.results-slider__slide {
+		grid-template-columns: minmax(0, 1fr) minmax(0, 0.88fr);
+		gap: 0 9%;
+		/* pull the image up into the overlap area */
+		margin-top: calc(var(--rs-overlap) * -1 - 0px);
+	}
+
+	.results-slider__aside {
+		height: 100%;
+		justify-content: space-between;
+		padding-top: calc(var(--rs-overlap) + 112px);
+	}
+
+	.results-slider__stats {
+		padding: 60px 32px;
+		gap: 56px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.results-slider__slide { animation: none; }
+	.results-slider__arrow,
+	.results-slider__link { transition: none; }
+}
+
+/* Fallback in case the theme doesn't define it. */
+.results-slider .screen-reader-text {
+	position: absolute !important;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
