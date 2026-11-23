@@ -54,3 +54,27 @@ demo/index.html                           Static preview with sample content (op
 - Font approximated with Inter – swap `--rs-font` for the brand font.
 - If the site uses a Flexible Content page builder instead of blocks, the same template works by
   swapping `get_field()` for `get_sub_field()`.
+
+---
+
+## Template-based version (classic theme + Flexible Content)
+
+The same module is also provided as a standard template module in `template-based/`, for themes that build
+pages from an ACF Flexible Content field rather than Gutenberg blocks. It shares the same CSS and JS.
+
+```
+template-based/acf-json/group_loop_page_modules.json          "Page Modules" Flexible Content field, layout: results_slider
+template-based/page-templates/template-modules.php            "Modular Page" template, loops through the modules
+template-based/template-parts/modules/results-slider.php      Module markup, using get_sub_field()
+template-based/functions-modules.php                          Enqueues assets only on pages using the module + ACF JSON paths
+```
+
+**How it works**
+
+1. A page using the **Modular Page** template gets a `page_modules` Flexible Content field.
+2. The template loops `have_rows( 'page_modules' )` and loads `template-parts/modules/{layout-name}.php`,
+   so adding a new module is just a new layout + a matching template part.
+3. CSS/JS are only enqueued when a `results_slider` layout is on the page.
+
+**Install:** copy the files into the theme (keeping the folder paths), add `assets/` from the root of this repo,
+and `require_once` `functions-modules.php` from `functions.php`.

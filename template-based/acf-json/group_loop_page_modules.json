@@ -1,0 +1,176 @@
+{
+    "key": "group_loop_page_modules",
+    "title": "Page Modules",
+    "fields": [
+        {
+            "key": "field_loop_page_modules",
+            "label": "Modules",
+            "name": "page_modules",
+            "type": "flexible_content",
+            "instructions": "Build the page by adding modules in order.",
+            "button_label": "Add Module",
+            "layouts": {
+                "layout_results_slider": {
+                    "key": "layout_results_slider",
+                    "name": "results_slider",
+                    "label": "Results Slider",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_mod_rs_heading",
+                            "label": "Heading",
+                            "name": "heading",
+                            "type": "textarea",
+                            "instructions": "Large background heading. Put each line on a new row (e.g. \"Real Results.\" / \"Real Growth.\").",
+                            "rows": 2,
+                            "new_lines": "",
+                            "default_value": "Real Results.\nReal Growth."
+                        },
+                        {
+                            "key": "field_mod_rs_slides",
+                            "label": "Slides",
+                            "name": "slides",
+                            "type": "repeater",
+                            "instructions": "Each slide is one case study.",
+                            "layout": "block",
+                            "min": 1,
+                            "max": 0,
+                            "button_label": "Add Slide",
+                            "collapsed": "field_mod_rs_summary",
+                            "sub_fields": [
+                                {
+                                    "key": "field_mod_rs_image",
+                                    "label": "Image",
+                                    "name": "image",
+                                    "type": "image",
+                                    "instructions": "Portrait image, recommended 960 x 1020px.",
+                                    "required": 1,
+                                    "return_format": "id",
+                                    "preview_size": "medium",
+                                    "library": "all",
+                                    "mime_types": "jpg,jpeg,png,webp",
+                                    "wrapper": {
+                                        "width": "35"
+                                    }
+                                },
+                                {
+                                    "key": "field_mod_rs_summary",
+                                    "label": "Summary",
+                                    "name": "summary",
+                                    "type": "textarea",
+                                    "rows": 3,
+                                    "new_lines": "",
+                                    "maxlength": 160,
+                                    "wrapper": {
+                                        "width": "65"
+                                    }
+                                },
+                                {
+                                    "key": "field_mod_rs_tags",
+                                    "label": "Tags",
+                                    "name": "tags",
+                                    "type": "repeater",
+                                    "instructions": "Service tags shown under the image, e.g. Website, SEO.",
+                                    "layout": "table",
+                                    "max": 4,
+                                    "button_label": "Add Tag",
+                                    "sub_fields": [
+                                        {
+                                            "key": "field_mod_rs_tag_label",
+                                            "label": "Label",
+                                            "name": "label",
+                                            "type": "text",
+                                            "required": 1
+                                        }
+                                    ]
+                                },
+                                {
+                                    "key": "field_mod_rs_stats",
+                                    "label": "Stats",
+                                    "name": "stats",
+                                    "type": "repeater",
+                                    "instructions": "Shown in the orange card (up to 3).",
+                                    "layout": "table",
+                                    "min": 1,
+                                    "max": 3,
+                                    "button_label": "Add Stat",
+                                    "sub_fields": [
+                                        {
+                                            "key": "field_mod_rs_stat_value",
+                                            "label": "Value",
+                                            "name": "value",
+                                            "type": "text",
+                                            "instructions": "e.g. 603 or £21k",
+                                            "required": 1,
+                                            "wrapper": {
+                                                "width": "25"
+                                            }
+                                        },
+                                        {
+                                            "key": "field_mod_rs_stat_suffix",
+                                            "label": "Suffix",
+                                            "name": "suffix",
+                                            "type": "text",
+                                            "instructions": "Smaller text, e.g. %",
+                                            "maxlength": 3,
+                                            "wrapper": {
+                                                "width": "15"
+                                            }
+                                        },
+                                        {
+                                            "key": "field_mod_rs_stat_label",
+                                            "label": "Label",
+                                            "name": "label",
+                                            "type": "text",
+                                            "required": 1,
+                                            "wrapper": {
+                                                "width": "60"
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "key": "field_mod_rs_link",
+                                    "label": "Case Study Link",
+                                    "name": "link",
+                                    "type": "link",
+                                    "instructions": "Optional. Shows the orange arrow link.",
+                                    "return_format": "array"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "field_mod_rs_anchor",
+                            "label": "Anchor ID",
+                            "name": "anchor",
+                            "type": "text",
+                            "instructions": "Optional. Used as the section ID for in-page links."
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                }
+            }
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-templates/template-modules.php"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [
+        "the_content"
+    ],
+    "active": true,
+    "description": "Flexible Content page builder for template-based pages.",
+    "show_in_rest": 0
+}
